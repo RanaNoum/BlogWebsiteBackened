@@ -131,13 +131,25 @@ class BlogPostAdmin(admin.ModelAdmin):
         models.TextField: {'widget': TinyMCE(attrs={'cols': 80, 'rows': 30})},
     }
     
-    list_display = ('id', 'title', 'description', 'category', 'published_date', 'author', 'image')
+    list_display = ('id', 'title', 'description', 'category', 'type_content', 'published_date', 'author', 'image')
     list_filter = ('category', 'author')
     search_fields = ('title', 'content')
 
     # def get_content(self, obj):
     #     return obj.content[:60] + '...' if len(obj.heading) > 60 else obj.heading
     # get_content.short_description = 'Content'
+
+
+
+
+
+from .models import Course
+@admin.register(Course)
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ('title', 'description')
+    search_fields = ('title', 'description')
+
+
 
 
 

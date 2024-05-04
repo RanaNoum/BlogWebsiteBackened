@@ -207,12 +207,25 @@ class BlogPost(models.Model):
     # heading = models.TextField('Heading_Content',blank=True)  # Replaces models.TextField()
     content = models.TextField()
     category = models.ForeignKey(Categorie, on_delete=models.CASCADE)
+    type_content = models.CharField(max_length=250)
     published_date = models.DateTimeField()
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='blog_images/', blank=True, null=True)  # New ImageField
 
     def __str__(self):
         return self.title
+
+
+
+class Course(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    image = models.ImageField(upload_to='course_images/', blank=True, null=True)
+
+    def __str__(self):
+        return self.title
+
+
 
 
 class Comment(models.Model):

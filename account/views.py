@@ -139,6 +139,18 @@ class BlogPostViewSet(viewsets.ModelViewSet):
     serializer_class = BlogPostSerializer
     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
 
+
+
+from .models import Course
+from .serializers import CourseSerializer
+class CourseViewSet(viewsets.ModelViewSet):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+    permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
+
+
+
+
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer

@@ -20,6 +20,7 @@ from .views import (
     ProjectViewSet,
     ServiceViewSet,
     BlogPostViewSet,
+    CourseViewSet,
     CommentViewSet,
     CompanyInformationViewSet,
     TeamMemberViewSet,
@@ -57,6 +58,7 @@ router.register(r'testimonials', TestimonialViewSet, basename='testimonial')
 router.register(r'projects', ProjectViewSet, basename='project')
 router.register(r'services', ServiceViewSet, basename='service')
 router.register(r'blogposts', BlogPostViewSet, basename='blogpost')
+router.register(r'courses', CourseViewSet, basename='course')
 router.register(r'comments', CommentViewSet, basename='comment')
 router.register(r'companyinformation', CompanyInformationViewSet, basename='companyinformation')
 router.register(r'teammembers', TeamMemberViewSet, basename='teammember')
@@ -81,6 +83,7 @@ urlpatterns = [
     path('api/testimonials/<int:pk>/', TestimonialViewSet.as_view({'get': 'retrieve'}), name='testimonial-detail'),
     path('api/services/<int:pk>/', ServiceViewSet.as_view({'get': 'retrieve'}), name='service-detail'),
     path('api/blogposts/<int:pk>/', BlogPostViewSet.as_view({'get': 'retrieve'}), name='blogpost-detail'),
+    path('api/courses/<int:pk>/', CourseViewSet.as_view({'get': 'retrieve'}), name='courses-detail'),
     path('api/comments/<int:pk>/', CommentViewSet.as_view({'get': 'retrieve'}), name='comment-detail'),
     path('api/companyinformation/<int:pk>/', CompanyInformationViewSet.as_view({'get': 'retrieve'}), name='companyinformation-detail'),
     path('api/teammembers/<int:pk>/', TeamMemberViewSet.as_view({'get': 'retrieve'}), name='teammember-detail'),
