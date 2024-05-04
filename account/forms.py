@@ -8,7 +8,7 @@ class BlogPostForm(forms.ModelForm):
 
     class Meta:
         model = BlogPost
-        fields = ['title', 'description','content', 'category', 'published_date', 'author', 'image']
+        fields = ['title', 'description', 'type_content','content', 'category', 'published_date', 'author', 'image']
         # Make sure to include all other fields you want to be part of the form
 
 class CaseForm(forms.ModelForm):
