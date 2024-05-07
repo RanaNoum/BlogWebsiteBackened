@@ -1,5 +1,5 @@
-from rest_framework import serializers
-from .models import Project, Service, BlogPost, Event, ServiceType,Case, Career, PricingEstimate, QuestionsAnswer, Categorie, Technologie, Industrie, Testimonial, Comment, CompanyInformation, TeamMember, Author, ContactInquirie, Industries_we_serve
+# from rest_framework import serializers
+# from .models import Project, Service, BlogPost, Event, ServiceType,Case, Career, PricingEstimate, QuestionsAnswer, Categorie, Technologie, Industrie, Testimonial, Comment, CompanyInformation, TeamMember, Author, ContactInquirie, Industries_we_serve
 from rest_framework import serializers
 from account.models import User
 from django.utils.encoding import smart_str, force_bytes, DjangoUnicodeDecodeError
@@ -123,97 +123,33 @@ class UserPasswordResetSerializer(serializers.Serializer):
 
 
 
+from rest_framework import serializers
+from .models import CategoryType, Categorie, BlogPost, Project, Service, Course
 
-
-from .models import Categorie, Technologie, Testimonial, Project, Service, BlogPost, Comment, CompanyInformation, TeamMember, Author, ContactInquirie
-
-
-class CommentSerializer(serializers.ModelSerializer):
+class CategoryTypeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Comment
+        model = CategoryType
         fields = '__all__'
 
-
-
-class TeamMemberSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = TeamMember
-        fields = '__all__'
-
-
-class EventSerializer(serializers.ModelSerializer):
-    
-    is_upcoming = serializers.ReadOnlyField()
-    duration = serializers.ReadOnlyField()
-
-    class Meta:
-        model = Event
-        fields = '__all__'
-
-
-class ServiceTypeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ServiceType
-        fields = '__all__'  # Serialize all fields from the Case model
-
-
-class TechnologySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Technologie
-        fields = '__all__'
-
-
-class IndustrySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Industrie
-        fields = '__all__'
-
-
-
-class CaseSerializer(serializers.ModelSerializer):
-    industries = IndustrySerializer(read_only=True)
-    created_by = User
-    service_type = ServiceTypeSerializer(many=True, read_only=True)
-    technologies = TechnologySerializer(many=True, read_only=True)
-    class Meta:
-        model = Case
-        fields = '__all__'  # Serialize all fields from the Case model
-
-
-class CategorySerializer(serializers.ModelSerializer):
+class CategorieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Categorie
         fields = '__all__'
 
-
-
-
-
-class TestimonialSerializer(serializers.ModelSerializer):
+class BlogPostSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Testimonial
+        model = BlogPost
         fields = '__all__'
 
-
 class ProjectSerializer(serializers.ModelSerializer):
-    # categories = CategorySerializer(many=True)
-    # Technology = TechnologySerializer()
-    # client_testimonials = TestimonialSerializer(many=True)
-
     class Meta:
         model = Project
         fields = '__all__'
-
 
 class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Service
         fields = '__all__'
-
-
-
-from rest_framework import serializers
-from .models import Course
 
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
@@ -226,65 +162,166 @@ class CourseSerializer(serializers.ModelSerializer):
 
 
 
-class BlogPostSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(read_only=True)
-    # category = CategorySerializer()
-    # user = serializers.CharField(source='user.username', read_only=True)  
-    # Username from User model (read-only)
-
-    class Meta:
-        model = BlogPost
-        fields = '__all__'
+# from .models import Categorie, Technologie, Testimonial, Project, Service, BlogPost, Comment, CompanyInformation, TeamMember, Author, ContactInquirie
 
 
-class AuthorSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Author
-        fields = '__all__'
-
-
-class ContactInquirySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ContactInquirie
-        fields = '__all__'
-
-
-class CompanyInformationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CompanyInformation
-        fields = '__all__'
-
-
-class CareerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Career
-        fields = '__all__'
+# class CommentSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Comment
+#         fields = '__all__'
 
 
 
-class PricingEstimateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PricingEstimate
-        fields = '__all__'
+# class TeamMemberSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = TeamMember
+#         fields = '__all__'
 
 
-from .models import Update
+# class EventSerializer(serializers.ModelSerializer):
+    
+#     is_upcoming = serializers.ReadOnlyField()
+#     duration = serializers.ReadOnlyField()
 
-class UpdateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Update
-        fields = '__all__'
-
-
-
-class QuestionsAnswerSerializer(serializers.ModelSerializer):
-  class Meta:
-    model = QuestionsAnswer
-    fields = ('id', 'Question', 'Answer')  # Fields to include in the serialized data
+#     class Meta:
+#         model = Event
+#         fields = '__all__'
 
 
+# class ServiceTypeSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = ServiceType
+#         fields = '__all__'  # Serialize all fields from the Case model
 
-class IndustriesWeServeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Industries_we_serve
-        fields = '__all__'
+
+# class TechnologySerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Technologie
+#         fields = '__all__'
+
+
+# class IndustrySerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Industrie
+#         fields = '__all__'
+
+
+
+# class CaseSerializer(serializers.ModelSerializer):
+#     industries = IndustrySerializer(read_only=True)
+#     created_by = User
+#     service_type = ServiceTypeSerializer(many=True, read_only=True)
+#     technologies = TechnologySerializer(many=True, read_only=True)
+#     class Meta:
+#         model = Case
+#         fields = '__all__'  # Serialize all fields from the Case model
+
+
+# class CategorySerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Categorie
+#         fields = '__all__'
+
+
+
+
+
+# class TestimonialSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Testimonial
+#         fields = '__all__'
+
+
+# class ProjectSerializer(serializers.ModelSerializer):
+#     # categories = CategorySerializer(many=True)
+#     # Technology = TechnologySerializer()
+#     # client_testimonials = TestimonialSerializer(many=True)
+
+#     class Meta:
+#         model = Project
+#         fields = '__all__'
+
+
+# class ServiceSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Service
+#         fields = '__all__'
+
+
+
+# from rest_framework import serializers
+# from .models import Course
+
+# class CourseSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Course
+#         fields = '__all__'
+
+
+
+
+
+
+
+# class BlogPostSerializer(serializers.ModelSerializer):
+#     category = CategorySerializer(read_only=True)
+#     # category = CategorySerializer()
+#     # user = serializers.CharField(source='user.username', read_only=True)  
+#     # Username from User model (read-only)
+
+#     class Meta:
+#         model = BlogPost
+#         fields = '__all__'
+
+
+# class AuthorSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Author
+#         fields = '__all__'
+
+
+# class ContactInquirySerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = ContactInquirie
+#         fields = '__all__'
+
+
+# class CompanyInformationSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = CompanyInformation
+#         fields = '__all__'
+
+
+# class CareerSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Career
+#         fields = '__all__'
+
+
+
+# class PricingEstimateSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = PricingEstimate
+#         fields = '__all__'
+
+
+# from .models import Update
+
+# class UpdateSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Update
+#         fields = '__all__'
+
+
+
+# class QuestionsAnswerSerializer(serializers.ModelSerializer):
+#   class Meta:
+#     model = QuestionsAnswer
+#     fields = ('id', 'Question', 'Answer')  # Fields to include in the serialized data
+
+
+
+# class IndustriesWeServeSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Industries_we_serve
+#         fields = '__all__'

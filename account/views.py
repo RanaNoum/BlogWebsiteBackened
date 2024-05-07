@@ -12,13 +12,13 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
-from django.http import JsonResponse
-from .models import Project, Service, BlogPost, CompanyInformation, ContactInquirie, User
+# from django.http import JsonResponse
+# from .models import Project, Service, BlogPost, CompanyInformation, ContactInquirie, User
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.admin.views.decorators import staff_member_required
 from rest_framework import viewsets
-from .models import Categorie, Technologie, QuestionsAnswer, Industrie, ServiceType,Case, Career, Update, PricingEstimate, Testimonial, Project, Service, BlogPost, Comment, CompanyInformation, TeamMember, Author, ContactInquirie, Event, Industries_we_serve
-from .serializers import CategorySerializer, UpdateSerializer, TechnologySerializer, IndustrySerializer,  ServiceTypeSerializer, CaseSerializer, CareerSerializer, PricingEstimateSerializer, TestimonialSerializer, ProjectSerializer, EventSerializer, ServiceSerializer, BlogPostSerializer, CommentSerializer, CompanyInformationSerializer, TeamMemberSerializer, AuthorSerializer, ContactInquirySerializer, QuestionsAnswerSerializer, IndustriesWeServeSerializer
+# from .models import Categorie, Technologie, QuestionsAnswer, Industrie, ServiceType,Case, Career, Update, PricingEstimate, Testimonial, Project, Service, BlogPost, Comment, CompanyInformation, TeamMember, Author, ContactInquirie, Event, Industries_we_serve
+# from .serializers import CategorySerializer, UpdateSerializer, TechnologySerializer, IndustrySerializer,  ServiceTypeSerializer, CaseSerializer, CareerSerializer, PricingEstimateSerializer, TestimonialSerializer, ProjectSerializer, EventSerializer, ServiceSerializer, BlogPostSerializer, CommentSerializer, CompanyInformationSerializer, TeamMemberSerializer, AuthorSerializer, ContactInquirySerializer, QuestionsAnswerSerializer, IndustriesWeServeSerializer
 from .permissions import IsGetRequestOrAdmin
 from django.contrib.auth import authenticate
 from rest_framework import views, status
@@ -104,24 +104,23 @@ class UserPasswordResetView(APIView):
 
 
 
-class CategoryViewSet(viewsets.ModelViewSet):
+from rest_framework import viewsets
+from .models import CategoryType, Categorie, BlogPost, Project, Service, Course
+from .serializers import CategoryTypeSerializer, CategorieSerializer, BlogPostSerializer, ProjectSerializer, ServiceSerializer, CourseSerializer
+
+class CategoryTypeViewSet(viewsets.ModelViewSet):
+    queryset = CategoryType.objects.all()
+    serializer_class = CategoryTypeSerializer
+    permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
+
+class CategorieViewSet(viewsets.ModelViewSet):
     queryset = Categorie.objects.all()
-    serializer_class = CategorySerializer
+    serializer_class = CategorieSerializer
     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
 
-class TechnologyViewSet(viewsets.ModelViewSet):
-    queryset = Technologie.objects.all()
-    serializer_class = TechnologySerializer
-    permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
-
-class IndustryViewSet(viewsets.ModelViewSet):
-    queryset = Industrie.objects.all()
-    serializer_class = IndustrySerializer
-    permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
-
-class TestimonialViewSet(viewsets.ModelViewSet):
-    queryset = Testimonial.objects.all()
-    serializer_class = TestimonialSerializer
+class BlogPostViewSet(viewsets.ModelViewSet):
+    queryset = BlogPost.objects.all()
+    serializer_class = BlogPostSerializer
     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
 
 class ProjectViewSet(viewsets.ModelViewSet):
@@ -134,15 +133,6 @@ class ServiceViewSet(viewsets.ModelViewSet):
     serializer_class = ServiceSerializer
     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
 
-class BlogPostViewSet(viewsets.ModelViewSet):
-    queryset = BlogPost.objects.all()
-    serializer_class = BlogPostSerializer
-    permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
-
-
-
-from .models import Course
-from .serializers import CourseSerializer
 class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
@@ -151,48 +141,102 @@ class CourseViewSet(viewsets.ModelViewSet):
 
 
 
-class CommentViewSet(viewsets.ModelViewSet):
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
-    permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
-
-class CompanyInformationViewSet(viewsets.ModelViewSet):
-    queryset = CompanyInformation.objects.all()
-    serializer_class = CompanyInformationSerializer
-    permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
-
-class TeamMemberViewSet(viewsets.ModelViewSet):
-    queryset = TeamMember.objects.all()
-    serializer_class = TeamMemberSerializer
-    permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
-
-class AuthorViewSet(viewsets.ModelViewSet):
-    queryset = Author.objects.all()
-    serializer_class = AuthorSerializer
-    permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
-
-class ContactInquiryViewSet(viewsets.ModelViewSet):
-    queryset = ContactInquirie.objects.all()
-    serializer_class = ContactInquirySerializer
-    permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
 
 
-class EventViewSet(viewsets.ModelViewSet):
-    queryset = Event.objects.all()
-    serializer_class = EventSerializer
-    permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
 
 
-class ServicetypeViewSet(viewsets.ModelViewSet):
-    queryset = ServiceType.objects.all()
-    serializer_class = ServiceTypeSerializer
-    permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
 
 
-class CaseViewSet(viewsets.ModelViewSet):
-    queryset = Case.objects.all()
-    serializer_class = CaseSerializer
-    permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
+
+# class CategoryViewSet(viewsets.ModelViewSet):
+#     queryset = Categorie.objects.all()
+#     serializer_class = CategorySerializer
+#     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
+
+# class TechnologyViewSet(viewsets.ModelViewSet):
+#     queryset = Technologie.objects.all()
+#     serializer_class = TechnologySerializer
+#     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
+
+# class IndustryViewSet(viewsets.ModelViewSet):
+#     queryset = Industrie.objects.all()
+#     serializer_class = IndustrySerializer
+#     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
+
+# class TestimonialViewSet(viewsets.ModelViewSet):
+#     queryset = Testimonial.objects.all()
+#     serializer_class = TestimonialSerializer
+#     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
+
+# class ProjectViewSet(viewsets.ModelViewSet):
+#     queryset = Project.objects.all()
+#     serializer_class = ProjectSerializer
+#     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
+
+# class ServiceViewSet(viewsets.ModelViewSet):
+#     queryset = Service.objects.all()
+#     serializer_class = ServiceSerializer
+#     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
+
+# class BlogPostViewSet(viewsets.ModelViewSet):
+#     queryset = BlogPost.objects.all()
+#     serializer_class = BlogPostSerializer
+#     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
+
+
+
+# from .models import Course
+# from .serializers import CourseSerializer
+# class CourseViewSet(viewsets.ModelViewSet):
+#     queryset = Course.objects.all()
+#     serializer_class = CourseSerializer
+#     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
+
+
+
+
+# class CommentViewSet(viewsets.ModelViewSet):
+#     queryset = Comment.objects.all()
+#     serializer_class = CommentSerializer
+#     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
+
+# class CompanyInformationViewSet(viewsets.ModelViewSet):
+#     queryset = CompanyInformation.objects.all()
+#     serializer_class = CompanyInformationSerializer
+#     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
+
+# class TeamMemberViewSet(viewsets.ModelViewSet):
+#     queryset = TeamMember.objects.all()
+#     serializer_class = TeamMemberSerializer
+#     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
+
+# class AuthorViewSet(viewsets.ModelViewSet):
+#     queryset = Author.objects.all()
+#     serializer_class = AuthorSerializer
+#     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
+
+# class ContactInquiryViewSet(viewsets.ModelViewSet):
+#     queryset = ContactInquirie.objects.all()
+#     serializer_class = ContactInquirySerializer
+#     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
+
+
+# class EventViewSet(viewsets.ModelViewSet):
+#     queryset = Event.objects.all()
+#     serializer_class = EventSerializer
+#     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
+
+
+# class ServicetypeViewSet(viewsets.ModelViewSet):
+#     queryset = ServiceType.objects.all()
+#     serializer_class = ServiceTypeSerializer
+#     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
+
+
+# class CaseViewSet(viewsets.ModelViewSet):
+#     queryset = Case.objects.all()
+#     serializer_class = CaseSerializer
+#     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
 
     # def get_queryset(self):
     #     """
@@ -206,36 +250,36 @@ class CaseViewSet(viewsets.ModelViewSet):
     #     return queryset    
 
 
-class CareerViewSet(viewsets.ModelViewSet):
-    queryset = Career.objects.all()
-    serializer_class = CareerSerializer
-    permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
+# class CareerViewSet(viewsets.ModelViewSet):
+#     queryset = Career.objects.all()
+#     serializer_class = CareerSerializer
+#     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
 
 
-class PricingEstimateViewSet(viewsets.ModelViewSet):
-    queryset = PricingEstimate.objects.all()
-    serializer_class = PricingEstimateSerializer
-    permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
-
-
-
-class UpdateViewSet(viewsets.ModelViewSet):
-    queryset = Update.objects.all()
-    serializer_class = UpdateSerializer
-    permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
-
-
-class QuestionsAnswerViewSet(viewsets.ModelViewSet):
-  queryset = QuestionsAnswer.objects.all()
-  serializer_class = QuestionsAnswerSerializer  # Use your created serializer
-  permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
+# class PricingEstimateViewSet(viewsets.ModelViewSet):
+#     queryset = PricingEstimate.objects.all()
+#     serializer_class = PricingEstimateSerializer
+#     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
 
 
 
-class IndustriesWeServeViewSet(viewsets.ModelViewSet):
-    queryset = Industries_we_serve.objects.all()
-    serializer_class = IndustriesWeServeSerializer
-    permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
+# class UpdateViewSet(viewsets.ModelViewSet):
+#     queryset = Update.objects.all()
+#     serializer_class = UpdateSerializer
+#     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
+
+
+# class QuestionsAnswerViewSet(viewsets.ModelViewSet):
+#   queryset = QuestionsAnswer.objects.all()
+#   serializer_class = QuestionsAnswerSerializer  # Use your created serializer
+#   permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
+
+
+
+# class IndustriesWeServeViewSet(viewsets.ModelViewSet):
+#     queryset = Industries_we_serve.objects.all()
+#     serializer_class = IndustriesWeServeSerializer
+#     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
 
 
 
