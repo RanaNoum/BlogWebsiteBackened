@@ -51,10 +51,9 @@ router = DefaultRouter()
 
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import CategoryTypeViewSet, CategorieViewSet, BlogPostViewSet, ProjectViewSet, ServiceViewSet, CourseViewSet
+from .views import CategorieViewSet, BlogPostViewSet, ProjectViewSet, ServiceViewSet, CourseViewSet
 
 router = DefaultRouter()
-router.register(r'categorytypes', CategoryTypeViewSet, basename='categorytype')
 router.register(r'categories', CategorieViewSet, basename='categorie')
 router.register(r'blogposts', BlogPostViewSet, basename='blogpost')
 router.register(r'projects', ProjectViewSet,'project')
@@ -63,7 +62,6 @@ router.register(r'courses', CourseViewSet, basename='course')
 
 urlpatterns = [
     path('api/', include(router.urls)),  # Corrected path (empty string '')
-    path('api/categorytypes/<int:pk>/', CategoryTypeViewSet.as_view({'get': 'retrieve'}), name='categorytype-detail'),
     path('api/categories/<int:pk>/', CategorieViewSet.as_view({'get': 'retrieve'}), name='categorie-detail'),
     path('api/blogposts/<int:pk>/', BlogPostViewSet.as_view({'get': 'retrieve'}), name='blogpost-detail'),
     path('api/projects/<int:pk>/', ProjectViewSet.as_view({'get': 'retrieve'}), name='project-detail'),

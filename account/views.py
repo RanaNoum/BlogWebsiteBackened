@@ -105,18 +105,25 @@ class UserPasswordResetView(APIView):
 
 
 from rest_framework import viewsets
-from .models import CategoryType, Categorie, BlogPost, Project, Service, Course
-from .serializers import CategoryTypeSerializer, CategorieSerializer, BlogPostSerializer, ProjectSerializer, ServiceSerializer, CourseSerializer
+from .models import  Categorie, BlogPost, Project, Service, Course
+from .serializers import  CategorieSerializer, BlogPostSerializer, ProjectSerializer, ServiceSerializer, CourseSerializer
+from django.http import JsonResponse
+from .models import Categorie
 
-class CategoryTypeViewSet(viewsets.ModelViewSet):
-    queryset = CategoryType.objects.all()
-    serializer_class = CategoryTypeSerializer
-    permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
+
 
 class CategorieViewSet(viewsets.ModelViewSet):
     queryset = Categorie.objects.all()
     serializer_class = CategorieSerializer
     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
+
+
+    def filter_categories(request):
+        category_type = request.GET.get('type')
+        name = request.GET.get('name')
+        categories = Categorie.objects.get_by_type(type=category_type, name=name)
+        data = [{'id': cat.id, 'name': cat.name} for cat in categories]
+        return JsonResponse(data, safe=False)
 
 class BlogPostViewSet(viewsets.ModelViewSet):
     queryset = BlogPost.objects.all()

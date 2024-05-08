@@ -1,15 +1,15 @@
-from django import forms
-from tinymce.widgets import TinyMCE
-from .models import BlogPost
+# from django import forms
+# from tinymce.widgets import TinyMCE
+# from .models import BlogPost
 # ,Case
 # from .models import PricingEstimate
 
-class BlogPostForm(forms.ModelForm):
-    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+# class BlogPostForm(forms.ModelForm):
+#     content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
 
-    class Meta:
-        model = BlogPost
-        fields = ['title', 'description', 'type_content','content', 'category', 'published_date', 'author', 'image']
+#     class Meta:
+#         model = BlogPost
+#         fields = ['title', 'description','content', 'category', 'published_date' 'image']
         # Make sure to include all other fields you want to be part of the form
 
 # class CaseForm(forms.ModelForm):
@@ -25,3 +25,36 @@ class BlogPostForm(forms.ModelForm):
 #     class Meta:
 #         model = PricingEstimate
 #         fields = ['service_type', 'feature_set', 'complexity', 'estimated_hours', 'hourly_rate', 'additional_costs', 'discounts', 'contact_information', 'file']
+
+
+from django import forms
+from tinymce.widgets import TinyMCE
+from .models import BlogPost, Project, Service, Course
+
+class BlogPostForm(forms.ModelForm):
+    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+
+    class Meta:
+        model = BlogPost
+        fields = '__all__'
+
+class ProjectForm(forms.ModelForm):
+    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+
+    class Meta:
+        model = Project
+        fields = '__all__'
+
+class ServiceForm(forms.ModelForm):
+    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+
+    class Meta:
+        model = Service
+        fields = '__all__'
+
+class CourseForm(forms.ModelForm):
+    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+
+    class Meta:
+        model = Course
+        fields = '__all__'

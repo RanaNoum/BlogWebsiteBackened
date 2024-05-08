@@ -124,12 +124,9 @@ class UserPasswordResetSerializer(serializers.Serializer):
 
 
 from rest_framework import serializers
-from .models import CategoryType, Categorie, BlogPost, Project, Service, Course
+from .models import Categorie, BlogPost, Project, Service, Course
 
-class CategoryTypeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CategoryType
-        fields = '__all__'
+
 
 class CategorieSerializer(serializers.ModelSerializer):
     class Meta:
@@ -137,6 +134,7 @@ class CategorieSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class BlogPostSerializer(serializers.ModelSerializer):
+    category = CategorieSerializer(read_only=True)
     class Meta:
         model = BlogPost
         fields = '__all__'

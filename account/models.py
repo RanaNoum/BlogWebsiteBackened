@@ -90,22 +90,64 @@ class User(AbstractBaseUser,PermissionsMixin):
 
 
 
-class CategoryType(models.Model):
-    blog = 'blog'
-    service = 'service'
-    project = 'project'
-    courses = 'courses'
+# class CategoryType(models.Choices):
+#     blog = 'blog'
+#     service = 'service'
+#     project = 'project'
+#     courses = 'courses'
+
+# class Categorie(models.Model):
+#     name = models.CharField(max_length=255, blank=True, null=True)
+#     category_type=models.ForeignKey(CategoryType, on_delete=models.CASCADE)
+    
+
+
+from django.db import models
+
+class CategoryType(models.TextChoices):
+    BLOG = 'blog', 'Blog'
+    SERVICE = 'service', 'Service'
+    PROJECT = 'project', 'Project'
+    COURSES = 'courses', 'Courses'
+
+
+# class CategoryManager(models.Manager):
+#     def get_by_type(self, type):
+#         return self.filter(category_type=type)
+
+class CategoryManager(models.Manager):
+    def get_by_type(self, type=None, name=None):
+        """
+        Filters categories by type and/or name.
+        If both type and name are provided, it filters by both.
+        If only one is provided, it filters by whichever is given.
+        """
+        queryset = self.all()
+        if type:
+            queryset = queryset.filter(category_type=type)
+        if name:
+            queryset = queryset.filter(name__icontains=name)
+        return queryset
+
 
 class Categorie(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
-    category_type=models.ForeignKey(CategoryType, on_delete=models.CASCADE)
-    
+    category_type = models.CharField(
+        max_length=10,
+        choices=CategoryType.choices,
+    )
+    objects = CategoryManager()
+
+    def __str__(self):
+        # return self.name
+        return f"{self.name} ({self.category_type})"
+
 
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
-    content = models.TextField()
+    content = models.TextField(max_length=1500)
     image = models.ImageField(upload_to='blog_images/', blank=True, null=True)  # New ImageField
     published_date = models.DateTimeField()
     category = models.ForeignKey(Categorie, on_delete=models.CASCADE)
@@ -117,7 +159,7 @@ class BlogPost(models.Model):
 
 class Project(models.Model):
     title = models.CharField(max_length=255)
-    description = models.TextField()
+    description = models.CharField(max_length=500)
     content = models.TextField()
     category = models.ManyToManyField(Categorie,related_name='categories')
     image = models.ImageField(upload_to='Project_images/', blank=True, null=True)  # New ImageField
@@ -127,7 +169,7 @@ class Project(models.Model):
 
 class Service(models.Model):
     title = models.CharField(max_length=255)
-    description = models.TextField()
+    description = models.CharField(max_length=500)
     content = models.TextField()
     image = models.ImageField(upload_to='Service_images/', blank=True, null=True)  # New ImageField
     category = models.ForeignKey(Categorie, on_delete=models.CASCADE)
@@ -136,7 +178,8 @@ class Service(models.Model):
 
 class Course(models.Model):
     title = models.CharField(max_length=255)
-    description = models.TextField()
+    description = models.CharField(max_length=500)
+    content = models.TextField()
     image = models.ImageField(upload_to='course_images/', blank=True, null=True)
 
     def __str__(self):
