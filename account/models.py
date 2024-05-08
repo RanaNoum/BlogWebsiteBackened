@@ -149,7 +149,7 @@ class BlogPost(models.Model):
     description = models.CharField(max_length=255)
     content = models.TextField(max_length=1500)
     image = models.ImageField(upload_to='blog_images/', blank=True, null=True)  # New ImageField
-    published_date = models.DateTimeField()
+    published_date = models.DateField()
     category = models.ForeignKey(Categorie, on_delete=models.CASCADE)
     
     def __str__(self):
