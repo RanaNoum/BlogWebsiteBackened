@@ -140,16 +140,19 @@ class BlogPostSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ProjectSerializer(serializers.ModelSerializer):
+    category = CategorieSerializer(read_only=True)
     class Meta:
         model = Project
         fields = '__all__'
 
 class ServiceSerializer(serializers.ModelSerializer):
+    category = CategorieSerializer(read_only=True)
     class Meta:
         model = Service
         fields = '__all__'
 
 class CourseSerializer(serializers.ModelSerializer):
+    category = CategorieSerializer(read_only=True)
     class Meta:
         model = Course
         fields = '__all__'

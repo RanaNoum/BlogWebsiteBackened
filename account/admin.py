@@ -68,7 +68,7 @@ class ServiceAdmin(admin.ModelAdmin):
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     form = CourseForm
-    list_display = ('id', 'title', 'content', 'description')
+    list_display = ('id', 'title', 'content', 'category', 'description')
 
 
 

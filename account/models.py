@@ -180,6 +180,7 @@ class Course(models.Model):
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=500)
     content = models.TextField()
+    category = models.ForeignKey(Categorie, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='course_images/', blank=True, null=True)
 
     def __str__(self):
