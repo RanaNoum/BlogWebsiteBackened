@@ -140,7 +140,7 @@ class BlogPostSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ProjectSerializer(serializers.ModelSerializer):
-    category = CategorieSerializer(read_only=True)
+    category = CategorieSerializer(read_only=True,many=True)
     class Meta:
         model = Project
         fields = '__all__'
