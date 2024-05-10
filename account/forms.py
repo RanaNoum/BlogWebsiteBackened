@@ -29,7 +29,7 @@
 
 from django import forms
 from tinymce.widgets import TinyMCE
-from .models import BlogPost, Project, Service, Course
+from .models import BlogPost, Project, Service, TeamMember, About_U
 
 class BlogPostForm(forms.ModelForm):
     content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
@@ -52,9 +52,23 @@ class ServiceForm(forms.ModelForm):
         model = Service
         fields = '__all__'
 
-class CourseForm(forms.ModelForm):
-    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+# class CourseForm(forms.ModelForm):
+#     content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
 
+#     class Meta:
+#         model = Course
+#         fields = '__all__'
+
+
+class TeamMemberForm(forms.ModelForm):
+    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
     class Meta:
-        model = Course
+        model = TeamMember
+        fields = '__all__'
+
+
+class AboutUsForm(forms.ModelForm):
+    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+    class Meta:
+        model = About_U
         fields = '__all__'

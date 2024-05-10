@@ -5,7 +5,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 # from .forms import BlogPostForm,CaseForm
 from tinymce.widgets import TinyMCE
 from django.db import models  # This import is necessary for models.TextField
-from .forms import BlogPostForm, ProjectForm, ServiceForm, CourseForm
+from .forms import BlogPostForm, ProjectForm, ServiceForm, TeamMemberForm, AboutUsForm
 
 
 
@@ -37,7 +37,7 @@ admin.site.register(User, UserModelAdmin)
 
 
 from django.contrib import admin
-from .models import Categorie, BlogPost, Project, Service, Course
+from .models import Categorie, BlogPost, Project, Service, TeamMember, About_U
 
 
 # Categorie Admin
@@ -64,12 +64,24 @@ class ServiceAdmin(admin.ModelAdmin):
     form = ServiceForm
     list_display = ('id', 'title', 'description', 'category')
 
-# Course Admin
-@admin.register(Course)
-class CourseAdmin(admin.ModelAdmin):
-    form = CourseForm
-    list_display = ('id', 'title', 'content', 'category', 'description')
+# # Course Admin
+# @admin.register(Course)
+# class CourseAdmin(admin.ModelAdmin):
+#     form = CourseForm
+#     list_display = ('id', 'title', 'content', 'category', 'description')
 
+
+@admin.register(TeamMember)
+class TeamMemberAdmin(admin.ModelAdmin):
+    form = TeamMemberForm
+    list_display = ['id', 'name', 'email', 'role','description', 'content']
+    search_fields = ['name', 'email', 'role']
+
+@admin.register(About_U)
+class AboutUsAdmin(admin.ModelAdmin):
+    form = AboutUsForm
+    list_display = ['id','description', 'content']
+    search_fields = ['content']
 
 
 

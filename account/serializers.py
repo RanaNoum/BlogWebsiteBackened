@@ -124,7 +124,7 @@ class UserPasswordResetSerializer(serializers.Serializer):
 
 
 from rest_framework import serializers
-from .models import Categorie, BlogPost, Project, Service, Course
+from .models import Categorie, BlogPost, Project, Service, TeamMember, About_U
 
 
 
@@ -151,12 +151,23 @@ class ServiceSerializer(serializers.ModelSerializer):
         model = Service
         fields = '__all__'
 
-class CourseSerializer(serializers.ModelSerializer):
-    category = CategorieSerializer(read_only=True)
+# class CourseSerializer(serializers.ModelSerializer):
+#     category = CategorieSerializer(read_only=True)
+#     class Meta:
+#         model = Course
+#         fields = '__all__'
+
+
+
+class TeamMemberSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Course
+        model = TeamMember
         fields = '__all__'
 
+class AboutUsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = About_U
+        fields = '__all__'
 
 
 
