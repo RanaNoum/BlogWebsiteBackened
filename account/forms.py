@@ -61,7 +61,7 @@ class ServiceForm(forms.ModelForm):
 
 
 class TeamMemberForm(forms.ModelForm):
-    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}),required=False)
     class Meta:
         model = TeamMember
         fields = '__all__'

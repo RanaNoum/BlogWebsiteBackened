@@ -194,19 +194,19 @@ phone_regex = RegexValidator(
 )
 
 class TeamMember(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
-    role = models.CharField(max_length=100)
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=50)
+    role = models.CharField(max_length=500)
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
-    description = models.CharField(max_length=500)
-    content = models.TextField()
+    description = models.CharField(max_length=5000)
+    content = models.TextField(null=True,blank=True)
     image = models.ImageField(upload_to='team_member_images/', blank=True, null=True)  # New ImageField
  
 
 
 class About_U(models.Model):
-    description = models.TextField()
-    content = models.TextField('write about vision')
+    description = models.TextField(max_length=5000)
+    content = models.TextField('write about vision',max_length=5000)
     feature_image = models.ImageField(upload_to='aboutUs_images/', blank=True, null=True)  # New ImageField
 
 
