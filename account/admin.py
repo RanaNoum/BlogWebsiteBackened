@@ -37,7 +37,7 @@ admin.site.register(User, UserModelAdmin)
 
 
 from django.contrib import admin
-from .models import Categorie, BlogPost, Project, Service, TeamMember, About_U
+from .models import Categorie, BlogPost, Project, Service, TeamMember, About_U, Contact_U
 
 
 # Categorie Admin
@@ -83,6 +83,12 @@ class AboutUsAdmin(admin.ModelAdmin):
     list_display = ['id','description', 'content']
     search_fields = ['content']
 
+
+
+@admin.register(Contact_U)
+class ContactUAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'object', 'message')
+    search_fields = ('name', 'email')
 
 
 

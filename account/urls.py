@@ -51,7 +51,7 @@ router = DefaultRouter()
 
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import CategorieViewSet, BlogPostViewSet, ProjectViewSet, ServiceViewSet, TeamMemberViewSet,AboutUsViewSet
+from .views import CategorieViewSet, BlogPostViewSet, ProjectViewSet, ServiceViewSet, TeamMemberViewSet,AboutUsViewSet,ContactUViewSet
 
 router = DefaultRouter()
 router.register(r'categories', CategorieViewSet, basename='categorie')
@@ -61,6 +61,7 @@ router.register(r'services', ServiceViewSet, basename='service')
 # router.register(r'courses', CourseViewSet, basename='course')
 router.register(r'teammembers', TeamMemberViewSet, basename='team_member')
 router.register(r'aboutus', AboutUsViewSet, basename='aboutus')
+router.register(r'contact_us', ContactUViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),  # Corrected path (empty string '')
@@ -71,6 +72,7 @@ urlpatterns = [
     # path('api/courses/<int:pk>/', CourseViewSet.as_view({'get': 'retrieve'}), name='course-detail'),
     path('api/teammembers/<int:pk>/', TeamMemberViewSet.as_view({'get': 'retrieve'}), name='team_member-detail'),
     path('api/aboutus/<int:pk>/', AboutUsViewSet.as_view({'get': 'retrieve'}), name='aboutus-detail'),
+    path('api/contact-us/<int:pk>/', ContactUViewSet.as_view({'get': 'retrieve'}), name='contact-detail'),
     path('login/', UserLoginView.as_view(), name='login'),
     path('profile/', UserProfileView.as_view(), name='profile'),
     path('changepassword/', UserChangePasswordView.as_view(), name='changepassword'),

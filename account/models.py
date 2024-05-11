@@ -203,12 +203,82 @@ class TeamMember(models.Model):
     image = models.ImageField(upload_to='team_member_images/', blank=True, null=True)  # New ImageField
  
 
+# from django.core.exceptions import ValidationError
+# from PIL import Image
+# from io import BytesIO
+
+# def validate_aspect_ratio(image, expected_ratio=21/9):
+#     # Open the image file
+#         im = Image.open(image)
+#         width, height = im.size
+
+#     # Calculate the aspect ratio
+#         actual_ratio = width / height
+
+#     # Check the aspect ratio
+#         if not (actual_ratio == expected_ratio):
+#             raise ValidationError(f'The aspect ratio of the image must be {expected_ratio:.2f}. Current ratio is {actual_ratio:.2f}.')
+
+
+
+
+# class About_U(models.Model):
+#     description = models.TextField(max_length=5000)
+#     content = models.TextField('write about vision',max_length=5000)
+#     # feature_image = models.ImageField(upload_to='aboutUs_images/', blank=True, null=True)  # New ImageField
+#     feature_image = models.ImageField(
+#         upload_to='aboutUs_images/',
+#         blank=True, 
+#         null=True,
+#         validators=[validate_aspect_ratio]  # Use the custom validator here
+#     )
+
 
 class About_U(models.Model):
-    description = models.TextField(max_length=5000)
-    content = models.TextField('write about vision',max_length=5000)
-    feature_image = models.ImageField(upload_to='aboutUs_images/', blank=True, null=True)  # New ImageField
+    description = models.CharField(max_length=5000)
+    content = models.TextField('write about vision', max_length=5000)
+    feature_image = models.ImageField(upload_to='aboutUs_images/', blank=True, null=True)
 
+
+
+class Contact_U(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=50)
+    object = models.CharField(max_length=50,blank=True, null=True)
+    message = models.TextField()
+
+
+
+    # def save(self, *args, **kwargs):
+    #     # Process the feature_image if it exists
+    #     if self.feature_image:
+    #         # Open the image
+    #         img = Image.open(self.feature_image)
+
+    #         # Define the new width and height maintaining 21:9 ratio
+    #         original_width, original_height = img.size
+    #         new_width = original_width
+    #         new_height = int(new_width / (16 / 9))
+
+    #         # Resize the image to new dimensions
+    #         if img.height != new_height or img.width != new_width:
+    #             new_img = img.resize((new_width, new_height), Image.Resampling.LANCZOS)  # Updated here
+                
+    #             # Save the resized image to a BytesIO object
+    #             image_temp = BytesIO()
+    #             new_img.save(image_temp, format=img.format)
+
+    #             # Set save=False, otherwise it will run in an infinite loop
+    #             self.feature_image.save(self.feature_image.name, InMemoryUploadedFile(
+    #                 image_temp,  # file
+    #                 None,  # field_name
+    #                 self.feature_image.name,  # file name
+    #                 'image/jpeg',  # content_type
+    #                 image_temp.tell(),  # size
+    #                 None)  # content_type_extra
+    #             , save=False)
+
+    #     super().save(*args, **kwargs)
 
 
 

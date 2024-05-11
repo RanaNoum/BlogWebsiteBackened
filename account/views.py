@@ -34,7 +34,6 @@ def get_tokens_for_user(user):
     }
 
 
-
 # class CustomTokenObtainPairView(views.APIView):
 #     def post(self, request, *args, **kwargs):
 #         username = request.data.get("username", "")
@@ -105,8 +104,8 @@ class UserPasswordResetView(APIView):
 
 
 from rest_framework import viewsets
-from .models import  Categorie, BlogPost, Project, Service, TeamMember, About_U
-from .serializers import  CategorieSerializer, BlogPostSerializer, ProjectSerializer, ServiceSerializer,TeamMemberSerializer, AboutUsSerializer
+from .models import  Categorie, BlogPost, Project, Service, TeamMember, About_U,Contact_U
+from .serializers import  CategorieSerializer, BlogPostSerializer, ProjectSerializer, ServiceSerializer,TeamMemberSerializer, AboutUsSerializer,ContactUSerializer
 from django.http import JsonResponse
 from .models import Categorie
 
@@ -157,6 +156,9 @@ class AboutUsViewSet(viewsets.ModelViewSet):
     permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
 
 
+class ContactUViewSet(viewsets.ModelViewSet):
+    queryset = Contact_U.objects.all()
+    serializer_class = ContactUSerializer
 
 
 

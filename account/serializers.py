@@ -124,7 +124,7 @@ class UserPasswordResetSerializer(serializers.Serializer):
 
 
 from rest_framework import serializers
-from .models import Categorie, BlogPost, Project, Service, TeamMember, About_U
+from .models import Categorie, BlogPost, Project, Service, TeamMember, About_U,Contact_U
 
 
 
@@ -170,6 +170,11 @@ class AboutUsSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+
+class ContactUSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contact_U
+        fields = '__all__'
 
 
 
