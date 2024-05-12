@@ -79,4 +79,4 @@ from .models import Product
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['title', 'price', 'quantity', 'skuId', 'brand', 'image', 'description']
+        fields = '__all__'

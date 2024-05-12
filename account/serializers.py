@@ -185,9 +185,10 @@ class ProductImageSerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     additional_images = ProductImageSerializer(many=True, read_only=True)
+    category = CategorieSerializer(read_only=True)
     class Meta:
         model = Product
-        fields = ['title', 'price', 'quantity', 'skuId', 'brand', 'image', 'description', 'additional_images']
+        fields = '__all__'
 
 
 

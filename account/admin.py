@@ -5,7 +5,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 # from .forms import BlogPostForm,CaseForm
 from tinymce.widgets import TinyMCE
 from django.db import models  # This import is necessary for models.TextField
-from .forms import BlogPostForm, ProjectForm, ServiceForm, TeamMemberForm, AboutUsForm
+from .forms import BlogPostForm, ProjectForm, ServiceForm, TeamMemberForm, AboutUsForm,ProductForm
 
 
 
@@ -97,7 +97,8 @@ class ProductImageInline(admin.TabularInline):
     extra = 1
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['title', 'price', 'quantity', 'skuId', 'brand']
+    form = ProductForm
+    list_display = ['id', 'title', 'price', 'quantity', 'skuId', 'brand', 'category']
     inlines = [ProductImageInline]
 
 admin.site.register(Product, ProductAdmin)

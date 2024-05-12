@@ -89,31 +89,12 @@ class User(AbstractBaseUser,PermissionsMixin):
 
 
 
-
-# class CategoryType(models.Choices):
-#     blog = 'blog'
-#     service = 'service'
-#     project = 'project'
-#     courses = 'courses'
-
-# class Categorie(models.Model):
-#     name = models.CharField(max_length=255, blank=True, null=True)
-#     category_type=models.ForeignKey(CategoryType, on_delete=models.CASCADE)
-    
-
-
-from django.db import models
-
 class CategoryType(models.TextChoices):
     BLOG = 'blog', 'Blog'
     SERVICE = 'service', 'Service'
     PROJECT = 'project', 'Project'
-    COURSES = 'courses', 'Courses'
+    SHOP = 'shop', 'Shop'
 
-
-# class CategoryManager(models.Manager):
-#     def get_by_type(self, type):
-#         return self.filter(category_type=type)
 
 class CategoryManager(models.Manager):
     def get_by_type(self, type=None, name=None):
@@ -176,17 +157,6 @@ class Service(models.Model):
 
 
 
-# class Course(models.Model):
-#     title = models.CharField(max_length=255)
-#     description = models.CharField(max_length=500)
-#     content = models.TextField()
-#     category = models.ForeignKey(Categorie, on_delete=models.CASCADE)
-#     image = models.ImageField(upload_to='course_images/', blank=True, null=True)
-
-#     def __str__(self):
-#         return self.title
-
-
 from django.core.validators import RegexValidator
 phone_regex = RegexValidator(
     regex=r'^\+?1?\d{9,15}$',
@@ -202,36 +172,6 @@ class TeamMember(models.Model):
     content = models.TextField(null=True,blank=True)
     image = models.ImageField(upload_to='team_member_images/', blank=True, null=True)  # New ImageField
  
-
-# from django.core.exceptions import ValidationError
-# from PIL import Image
-# from io import BytesIO
-
-# def validate_aspect_ratio(image, expected_ratio=21/9):
-#     # Open the image file
-#         im = Image.open(image)
-#         width, height = im.size
-
-#     # Calculate the aspect ratio
-#         actual_ratio = width / height
-
-#     # Check the aspect ratio
-#         if not (actual_ratio == expected_ratio):
-#             raise ValidationError(f'The aspect ratio of the image must be {expected_ratio:.2f}. Current ratio is {actual_ratio:.2f}.')
-
-
-
-
-# class About_U(models.Model):
-#     description = models.TextField(max_length=5000)
-#     content = models.TextField('write about vision',max_length=5000)
-#     # feature_image = models.ImageField(upload_to='aboutUs_images/', blank=True, null=True)  # New ImageField
-#     feature_image = models.ImageField(
-#         upload_to='aboutUs_images/',
-#         blank=True, 
-#         null=True,
-#         validators=[validate_aspect_ratio]  # Use the custom validator here
-#     )
 
 
 class About_U(models.Model):
@@ -249,15 +189,15 @@ class Contact_U(models.Model):
 
 
 
-
 class Product(models.Model):
     title = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.IntegerField()
-    skuId = models.IntegerField(max_length=100)
+    skuId = models.IntegerField()
     brand = models.CharField(max_length=255)
     image = models.ImageField(blank=True, null=True, upload_to='products/%Y/%m/%d/')
     description = models.TextField(blank=True, null=True)  # Optional text field for product description
+    category = models.ForeignKey(Categorie, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
@@ -268,6 +208,29 @@ class ProductImage(models.Model):
 
     def __str__(self):
         return f"{self.product.title} Image"
+
+
+
+
+
+
+
+
+
+
+# class CategoryType(models.Choices):
+#     blog = 'blog'
+#     service = 'service'
+#     project = 'project'
+#     courses = 'courses'
+
+# class Categorie(models.Model):
+#     name = models.CharField(max_length=255, blank=True, null=True)
+#     category_type=models.ForeignKey(CategoryType, on_delete=models.CASCADE)
+    
+# class CategoryManager(models.Manager):
+#     def get_by_type(self, type):
+#         return self.filter(category_type=type)
 
 
     # def save(self, *args, **kwargs):
@@ -302,7 +265,45 @@ class ProductImage(models.Model):
     #     super().save(*args, **kwargs)
 
 
+# from django.core.exceptions import ValidationError
+# from PIL import Image
+# from io import BytesIO
 
+# def validate_aspect_ratio(image, expected_ratio=21/9):
+#     # Open the image file
+#         im = Image.open(image)
+#         width, height = im.size
+
+#     # Calculate the aspect ratio
+#         actual_ratio = width / height
+
+#     # Check the aspect ratio
+#         if not (actual_ratio == expected_ratio):
+#             raise ValidationError(f'The aspect ratio of the image must be {expected_ratio:.2f}. Current ratio is {actual_ratio:.2f}.')
+
+
+
+
+# class About_U(models.Model):
+#     description = models.TextField(max_length=5000)
+#     content = models.TextField('write about vision',max_length=5000)
+#     # feature_image = models.ImageField(upload_to='aboutUs_images/', blank=True, null=True)  # New ImageField
+#     feature_image = models.ImageField(
+#         upload_to='aboutUs_images/',
+#         blank=True, 
+#         null=True,
+#         validators=[validate_aspect_ratio]  # Use the custom validator here
+#     )
+
+# class Course(models.Model):
+#     title = models.CharField(max_length=255)
+#     description = models.CharField(max_length=500)
+#     content = models.TextField()
+#     category = models.ForeignKey(Categorie, on_delete=models.CASCADE)
+#     image = models.ImageField(upload_to='course_images/', blank=True, null=True)
+
+#     def __str__(self):
+#         return self.title
 
 
 # class Categorie(models.Model):

@@ -104,8 +104,8 @@ class UserPasswordResetView(APIView):
 
 
 from rest_framework import viewsets
-from .models import  Categorie, BlogPost, Project, Service, TeamMember, About_U,Contact_U
-from .serializers import  CategorieSerializer, BlogPostSerializer, ProjectSerializer, ServiceSerializer,TeamMemberSerializer, AboutUsSerializer,ContactUSerializer
+from .models import  Categorie, BlogPost, Project, Service, TeamMember, About_U, Contact_U, Product
+from .serializers import  CategorieSerializer, BlogPostSerializer, ProjectSerializer, ServiceSerializer,TeamMemberSerializer, AboutUsSerializer,ContactUSerializer,ProductSerializer
 from django.http import JsonResponse
 from .models import Categorie
 
@@ -161,12 +161,10 @@ class ContactUViewSet(viewsets.ModelViewSet):
     serializer_class = ContactUSerializer
 
 
-from .models import Product
-from .serializers import ProductSerializer
-
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    permission_classes = [IsGetRequestOrAdmin]  # Apply the custom permission
 
 
 
