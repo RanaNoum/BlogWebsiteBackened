@@ -177,6 +177,19 @@ class ContactUSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+from .models import Product, ProductImage
+class ProductImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductImage
+        fields = ['image']
+
+class ProductSerializer(serializers.ModelSerializer):
+    additional_images = ProductImageSerializer(many=True, read_only=True)
+    class Meta:
+        model = Product
+        fields = ['title', 'price', 'quantity', 'skuId', 'brand', 'image', 'description', 'additional_images']
+
+
 
 
 # from .models import Categorie, Technologie, Testimonial, Project, Service, BlogPost, Comment, CompanyInformation, TeamMember, Author, ContactInquirie

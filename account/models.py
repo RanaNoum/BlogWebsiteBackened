@@ -249,6 +249,27 @@ class Contact_U(models.Model):
 
 
 
+
+class Product(models.Model):
+    title = models.CharField(max_length=255)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.IntegerField()
+    skuId = models.CharField(max_length=255)
+    brand = models.CharField(max_length=255)
+    image = models.ImageField(blank=True, null=True, upload_to='products/%Y/%m/%d/')
+    description = models.TextField(blank=True, null=True)  # Optional text field for product description
+
+    def __str__(self):
+        return self.title
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product, related_name='additional_images', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='product_images/%Y/%m/%d/', blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.product.title} Image"
+
+
     # def save(self, *args, **kwargs):
     #     # Process the feature_image if it exists
     #     if self.feature_image:

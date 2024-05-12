@@ -91,6 +91,20 @@ class ContactUAdmin(admin.ModelAdmin):
     search_fields = ('name', 'email')
 
 
+from .models import Product, ProductImage
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
+    extra = 1
+
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ['title', 'price', 'quantity', 'skuId', 'brand']
+    inlines = [ProductImageInline]
+
+admin.site.register(Product, ProductAdmin)
+admin.site.register(ProductImage)
+
+
+
 
 
 # @admin.register(Categorie)

@@ -161,6 +161,12 @@ class ContactUViewSet(viewsets.ModelViewSet):
     serializer_class = ContactUSerializer
 
 
+from .models import Product
+from .serializers import ProductSerializer
+
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
 
 
 

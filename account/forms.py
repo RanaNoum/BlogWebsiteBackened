@@ -72,3 +72,11 @@ class AboutUsForm(forms.ModelForm):
     class Meta:
         model = About_U
         fields = '__all__'
+
+
+from .models import Product
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['title', 'price', 'quantity', 'skuId', 'brand', 'image', 'description']
