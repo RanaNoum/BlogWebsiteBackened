@@ -254,7 +254,7 @@ class Product(models.Model):
     title = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.IntegerField()
-    skuId = models.CharField(max_length=255)
+    skuId = models.IntegerField(max_length=100)
     brand = models.CharField(max_length=255)
     image = models.ImageField(blank=True, null=True, upload_to='products/%Y/%m/%d/')
     description = models.TextField(blank=True, null=True)  # Optional text field for product description
