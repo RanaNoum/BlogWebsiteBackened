@@ -128,9 +128,9 @@ class Categorie(models.Model):
 class BlogPost(models.Model):
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
-    content = models.TextField(max_length=1500)
     image = models.ImageField(upload_to='blog_images/', blank=True, null=True)  # New ImageField
     published_date = models.DateField()
+    content = models.TextField(max_length=1500)
     category = models.ForeignKey(Categorie, on_delete=models.CASCADE)
     
     def __str__(self):
@@ -141,9 +141,9 @@ class BlogPost(models.Model):
 class Project(models.Model):
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=500)
-    content = models.TextField()
     category = models.ManyToManyField(Categorie,related_name='categories')
     image = models.ImageField(upload_to='Project_images/', blank=True, null=True)  # New ImageField
+    content = models.TextField()
 
     def __str__(self):
         return self.title
@@ -151,9 +151,9 @@ class Project(models.Model):
 class Service(models.Model):
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=500)
-    content = models.TextField()
     image = models.ImageField(upload_to='Service_images/', blank=True, null=True)  # New ImageField
     category = models.ForeignKey(Categorie, on_delete=models.CASCADE)
+    content = models.TextField()
 
 
 
@@ -176,9 +176,8 @@ class TeamMember(models.Model):
 
 class About_U(models.Model):
     description = models.CharField(max_length=5000)
-    content = models.TextField('write about vision', max_length=5000)
     feature_image = models.ImageField(upload_to='aboutUs_images/', blank=True, null=True)
-
+    content = models.TextField('write about vision', max_length=5000)
 
 
 class Contact_U(models.Model):
