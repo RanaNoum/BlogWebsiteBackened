@@ -65,7 +65,7 @@ INSTALLED_APPS = [
 
 TINYMCE_DEFAULT_CONFIG = {
     'height': 700,
-    'width': 900,
+    'width': 500,
     'cleanup_on_startup': True,
     'custom_undo_redo_levels': 20,
     'selector': 'textarea',

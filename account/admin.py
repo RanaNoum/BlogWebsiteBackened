@@ -80,7 +80,7 @@ class TeamMemberAdmin(admin.ModelAdmin):
 @admin.register(About_U)
 class AboutUsAdmin(admin.ModelAdmin):
     form = AboutUsForm
-    list_display = ['id','description', 'content']
+    list_display = ['id', 'content']
     search_fields = ['content']
 
 

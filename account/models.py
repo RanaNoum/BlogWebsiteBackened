@@ -175,8 +175,6 @@ class TeamMember(models.Model):
 
 
 class About_U(models.Model):
-    description = models.CharField(max_length=5000)
-    feature_image = models.ImageField(upload_to='aboutUs_images/', blank=True, null=True)
     content = models.TextField('write about vision', max_length=5000)
 
 
@@ -192,7 +190,7 @@ class Product(models.Model):
     title = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.IntegerField()
-    skuId = models.IntegerField()
+    skuId = models.CharField(max_length=50)  # Adjust the max_length as needed
     brand = models.CharField(max_length=255)
     image = models.ImageField(blank=True, null=True, upload_to='products/%Y/%m/%d/')
     description = models.TextField(blank=True, null=True)  # Optional text field for product description
