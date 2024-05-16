@@ -5,7 +5,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 # from .forms import BlogPostForm,CaseForm
 from tinymce.widgets import TinyMCE
 from django.db import models  # This import is necessary for models.TextField
-from .forms import BlogPostForm, ProjectForm, ServiceForm, TeamMemberForm, AboutUsForm,ProductForm
+from .forms import BlogPostForm, ProjectForm, ServiceForm, TeamMemberForm, AboutUsForm,ProductForm,PrivacyPolicyForm,TermsAndConditionsForm
 
 
 
@@ -103,6 +103,26 @@ class ProductAdmin(admin.ModelAdmin):
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductImage)
+
+
+
+from .models import PrivacyPolicy, TermsAndConditions
+
+@admin.register(PrivacyPolicy)
+class PrivacyPolicyAdmin(admin.ModelAdmin):
+    form = PrivacyPolicyForm
+    formfield_overrides = {
+        models.TextField: {'widget': TinyMCE(attrs={'cols': 80, 'rows': 30})},
+    }
+    list_display = ('id','content')
+
+@admin.register(TermsAndConditions)
+class TermsAndConditionsAdmin(admin.ModelAdmin):
+    form = TermsAndConditionsForm
+    formfield_overrides = {
+        models.TextField: {'widget': TinyMCE(attrs={'cols': 80, 'rows': 30})},
+    }
+    list_display = ('id','content')
 
 
 

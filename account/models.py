@@ -208,7 +208,17 @@ class ProductImage(models.Model):
 
 
 
+class PrivacyPolicy(models.Model):
+    content = models.TextField()
 
+    def __str__(self):
+        return "Privacy Policy Content"
+
+class TermsAndConditions(models.Model):
+    content = models.TextField()
+
+    def __str__(self):
+        return "Terms and Conditions Content"
 
 
 

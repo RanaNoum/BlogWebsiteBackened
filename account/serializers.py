@@ -192,6 +192,20 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 
+from .models import PrivacyPolicy, TermsAndConditions
+
+class PrivacyPolicySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PrivacyPolicy
+        fields = ['id', 'content']
+
+class TermsAndConditionsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TermsAndConditions
+        fields = ['id', 'content']
+
+
+
 
 # from .models import Categorie, Technologie, Testimonial, Project, Service, BlogPost, Comment, CompanyInformation, TeamMember, Author, ContactInquirie
 

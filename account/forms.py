@@ -80,3 +80,23 @@ class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = '__all__'
+
+
+
+from .models import PrivacyPolicy, TermsAndConditions
+
+class PrivacyPolicyForm(forms.ModelForm):
+    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+
+    class Meta:
+        model = PrivacyPolicy
+        fields = '__all__'
+        
+
+class TermsAndConditionsForm(forms.ModelForm):
+    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+
+    class Meta:
+        model = TermsAndConditions
+        fields = '__all__'
+        
