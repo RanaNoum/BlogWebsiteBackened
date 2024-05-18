@@ -152,7 +152,7 @@ class Service(models.Model):
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=500)
     image = models.ImageField(upload_to='Service_images/', blank=True, null=True)  # New ImageField
-    category = models.ForeignKey(Categorie, on_delete=models.CASCADE)
+    category = models.ForeignKey(Categorie, on_delete=models.CASCADE, blank=True, null=True)
     content = models.TextField()
 
 
